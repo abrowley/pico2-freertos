@@ -10,7 +10,7 @@
 #define DELAY 1000
 #define WIFI_RETRY 3
 
-void v_wifi(void*) {
+[[noreturn]] void v_wifi(void*) {
     if (cyw43_arch_init_with_country(CYW43_COUNTRY_UK)) {
         printf("failed to initialise\n");
     }
@@ -38,18 +38,16 @@ void v_wifi(void*) {
 
 }
 
-void v_blink(void*){
+[[noreturn]] void v_blink(void*){
     printf("LED Task\n");
     gpio_init(LED_PIN);
-    for(;;){
+    while (true) {
         printf("LED Task loop\n");
         gpio_set_dir(LED_PIN,GPIO_OUT);
         gpio_put(LED_PIN, true);
-        //sleep_ms(1000);
         vTaskDelay(DELAY);
         gpio_put(LED_PIN, false);
         vTaskDelay(DELAY);
-        //sleep_ms(1000);
     }
 }
 
