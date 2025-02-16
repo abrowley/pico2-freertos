@@ -31,7 +31,6 @@ void v_wifi(void*) {
         printf("Connect failed after %i retry attempts\n", WIFI_RETRY);
         exit(-1);
     }
-
     while(true){
         vTaskDelay(DELAY);
         printf("Wifi Task\n");
